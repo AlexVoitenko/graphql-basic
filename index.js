@@ -1,31 +1,12 @@
 const express = require('express');
-const { makeExecutableSchema } = require('graphql-tools');
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const bodyParser = require('body-parser');
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+
+require('./api/db');
+
+const { schema } = require('./gql/schema');
 
 const app = express();
-
-// SDL
-const typeDefs = `
-  schema {
-    query: Query
-  }
-  
-  type Query {
-    currentDate: String
-  }
-`;
-
-// Resolvers
-const resolvers = {
-  Query: { currentDate: () => new Date() },
-};
-
-// Graphql schema
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
 
 // graphql middleware
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
