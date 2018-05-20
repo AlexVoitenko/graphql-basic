@@ -29,4 +29,29 @@ module.exports = gql`
       skip: Int = 0
     ): [Question!]!
   }
+  
+  input CreateQuestionInput {
+    title: String!
+    description: String!
+    tags: [Tags]!
+  }
+  
+  input UpdateQuestionInput {
+    title: String!
+    description: String!
+    tags: [Tags]!
+  }
+  
+  extend type Mutation {
+    createQuestion(
+     input: CreateQuestionInput!
+    ): Question!
+    updateQuestion(
+      _id: ID!
+      input: UpdateQuestionInput!
+    ): Question!
+    deleteQuestion(
+      _id: ID!
+    ): Boolean
+  }
 `;

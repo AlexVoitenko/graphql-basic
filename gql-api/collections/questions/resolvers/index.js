@@ -10,6 +10,20 @@ module.exports = {
       Question.find({}, {}, { limit, skip, sort: { createdAt: -1 } }),
     question: (_, { _id }) => Question.findById(_id),
   },
+  Mutation: {
+    createQuestion: (_, { input }) =>
+      Question.create({
+        ...input,
+        createdAt: new Date(),
+      }),
+    updateQuestion: (_, { _id, input }) =>
+      Question.findOneAndUpdate(
+        { _id },
+        { $set: input },
+        { new: true },
+      ),
+    deleteQuestion: (_, { _id }) => Question.remove({ _id }),
+  },
   // Resolvers for specific Question field
   Question: {
     // Just Modify existed field

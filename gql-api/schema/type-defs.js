@@ -6,12 +6,17 @@ const userTypes = require('../collections/users/type-defs');
 const root = gql`
   schema {
     query: Query
+    mutation: Mutation
   }
   
   # Declare custom scalars
   scalar DateTime
   
   type Query {
+    _: Boolean # Costyl' because type can't be empty
+  }
+  
+  type Mutation {
     _: Boolean # Costyl' because type can't be empty
   }
 `;
