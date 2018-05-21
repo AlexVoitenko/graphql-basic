@@ -19,6 +19,7 @@ module.exports = gql`
     createdAt: DateTime
     # An author of question
     author: User
+    answers: [Answer]
   }
   
   # Extend root level type Query

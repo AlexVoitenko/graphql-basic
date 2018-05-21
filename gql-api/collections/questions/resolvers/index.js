@@ -1,5 +1,6 @@
-const { Question } = require('../modal/index');
-const { User } = require('../../users/modal/index');
+const { Question } = require('../model/index');
+const { User } = require('../../users/model/index');
+const { Answer } = require('../../answers/model');
 
 const MAX_SHORT_DES_LENGTH = 50;
 
@@ -34,5 +35,7 @@ module.exports = {
     // Fetch question author by `createdBy` id field
     // Require to specify User type and resolver
     author: ({ createdBy }) => User.findById(createdBy),
+    answers: ({ _id }) =>
+      Answer.find({ questionId: _id }, {}, { sort: { createdAt: -1 } }),
   },
 };

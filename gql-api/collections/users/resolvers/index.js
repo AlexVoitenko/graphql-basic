@@ -1,5 +1,5 @@
-const { User } = require('../modal/index');
-const { Question } = require('../../questions/modal/index');
+const { User } = require('../model/index');
+const { Question } = require('../../questions/model/index');
 
 module.exports = {
   Query: {
